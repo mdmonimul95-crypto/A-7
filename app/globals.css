@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[data-theme="keenkeeper"] {
+  --color-base-100: #f8faf8;
+  --color-base-200: #eef3ee;
+  --color-base-300: #dce8dc;
+  --color-base-content: #1a2e1a;
+  --color-primary: #2d6a4f;
+  --color-primary-content: #ffffff;
+  --color-secondary: #52b788;
+  --color-secondary-content: #ffffff;
+  --color-accent: #b7e4c7;
+  --color-neutral: #1b4332;
+  --color-neutral-content: #d8f3dc;
+  --color-info: #4cc9f0;
+  --color-success: #52b788;
+  --color-warning: #f4a261;
+  --color-error: #e63946;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+
+.status-overdue {
+  background-color: #fde8e8;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.status-almost-due {
+  background-color: #fff8e1;
+  color: #f57f17;
+  border: 1px solid #ffe082;
+}
+
+.status-on-track {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+
+.friend-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.friend-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(45, 106, 79, 0.18);
+}
+
+
+.nav-active {
+  color: #2d6a4f;
+  font-weight: 600;
+  border-bottom: 2px solid #2d6a4f;
+}
