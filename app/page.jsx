@@ -1,55 +1,47 @@
 import friends from "@/data/friends.json";
 import FriendCard from "@/components/FriendCard";
-import { Users, AlertCircle, Clock, CheckCircle, Plus } from "lucide-react";
-import Link from "next/link";
+import { Plus } from "lucide-react";
 
 export default function HomePage() {
-  const overdue = friends.filter((f) => f.status === "overdue").length;
-  const almostDue = friends.filter((f) => f.status === "almost due").length;
   const onTrack = friends.filter((f) => f.status === "on-track").length;
+  const needAttention = friends.filter((f) => f.status !== "on-track").length;
 
   const summaryCards = [
-    { label: "Total Friends", value: friends.length, icon: Users, color: "text-primary", bg: "bg-primary/10" },
-    { label: "Overdue", value: overdue, icon: AlertCircle, color: "text-error", bg: "bg-error/10" },
-    { label: "Almost Due", value: almostDue, icon: Clock, color: "text-warning", bg: "bg-warning/10" },
-    { label: "On Track", value: onTrack, icon: CheckCircle, color: "text-success", bg: "bg-success/10" },
+    { label: "Total Friends", value: friends.length },
+    { label: "On Track", value: onTrack },
+    { label: "Need Attention", value: needAttention },
+    { label: "Interactions This Month", value: 12 },
   ];
 
   return (
     <div>
       {/* Banner */}
-      <section className="bg-gradient-to-br from-primary to-neutral py-20 px-4 text-center">
-        <h1 className="font-display text-4xl sm:text-5xl text-white font-bold mb-3">
+      <section className="bg-white py-16 px-4 text-center border-b border-base-300">
+        <h1 className="font-display text-4xl sm:text-5xl text-base-content font-bold mb-3">
           Friends to keep close in your life
         </h1>
-        <p className="text-white/70 text-lg mb-8 max-w-xl mx-auto">
-          Stay intentional. Track your friendships and never lose touch with the
-          people who matter most.
+        <p className="text-gray-400 text-base mb-8 max-w-md mx-auto">
+          Your personal shelf of meaningful connections. Browse, tend, and nurture the
+          relationships that matter most.
         </p>
-        <button className="btn btn-secondary gap-2 text-white font-semibold px-6">
-          <Plus size={18} />
+        <button className="btn bg-neutral text-white hover:bg-primary gap-2 px-6">
+          <Plus size={16} />
           Add a Friend
         </button>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mt-12">
-          {summaryCards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <div
-                key={card.label}
-                className="bg-white/95 rounded-2xl p-4 flex flex-col items-center gap-1 shadow-md"
-              >
-                <div className={`w-10 h-10 rounded-full ${card.bg} flex items-center justify-center mb-1`}>
-                  <Icon size={20} className={card.color} />
-                </div>
-                <span className={`text-3xl font-bold font-display ${card.color}`}>
-                  {card.value}
-                </span>
-                <span className="text-xs text-gray-500 font-medium">{card.label}</span>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mt-10">
+          {summaryCards.map((card) => (
+            <div
+              key={card.label}
+              className="bg-white rounded-xl border border-base-300 p-5 flex flex-col items-center gap-1 shadow-sm"
+            >
+              <span className="text-3xl font-bold font-display text-base-content">
+                {card.value}
+              </span>
+              <span className="text-xs text-gray-400 font-medium">{card.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 

@@ -13,39 +13,36 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-white border-b border-base-300 sticky top-0 z-50 shadow-sm">
+    <nav className="bg-white border-b border-base-300 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
+
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-white text-sm font-bold">KK</span>
-            </div>
-            <span className="font-display text-xl text-primary font-semibold">
-              KeenKeeper
-            </span>
+          <Link href="/" className="font-display text-xl font-bold text-base-content">
+            KeenKeeper
           </Link>
 
           {/* Nav Links */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
             {links.map(({ href, label, icon: Icon }) => {
               const isActive = pathname === href;
               return (
                 <Link
                   key={href}
                   href={href}
-                  className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
+                  className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                     isActive
-                      ? "bg-primary/10 text-primary font-semibold"
-                      : "text-gray-500 hover:text-primary hover:bg-primary/5"
+                      ? "bg-neutral text-white"
+                      : "text-gray-500 hover:text-base-content"
                   }`}
                 >
-                  <Icon size={16} />
+                  <Icon size={15} />
                   {label}
                 </Link>
               );
             })}
           </div>
+
         </div>
       </div>
     </nav>
