@@ -16,6 +16,7 @@ const tagStyles = {
   "neighbor":     "bg-lime-100 text-lime-700",
   "photography":  "bg-rose-100 text-rose-700",
   "family":       "bg-amber-100 text-amber-700",
+  "hobby":        "bg-green-100 text-green-700",
 };
 
 function getTagStyle(tag) {
@@ -23,9 +24,9 @@ function getTagStyle(tag) {
 }
 
 const statusConfig = {
-  overdue: { label: "Overdue", className: "status-overdue" },
-  "almost due": { label: "Almost Due", className: "status-almost-due" },
-  "on-track": { label: "On Track", className: "status-on-track" },
+  overdue:      { label: "Overdue",    className: "bg-red-500 text-white" },
+  "almost due": { label: "Almost Due", className: "bg-orange-400 text-white" },
+  "on-track":   { label: "On Track",   className: "bg-green-500 text-white" },
 };
 
 export default function FriendDetailClient({ friend }) {
@@ -38,126 +39,111 @@ export default function FriendDetailClient({ friend }) {
     toast(`${icons[type]} ${type} with ${friend.name} logged!`);
   };
 
-  const checkinButtons = [
-    { type: "Call", icon: Phone, label: "Call" },
-    { type: "Text", icon: MessageSquare, label: "Text" },
-    { type: "Video", icon: Video, label: "Video" },
-  ];
-
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* LEFT COLUMN */}
-        <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl border border-base-300 p-6 flex flex-col items-center text-center gap-4">
+        <div className="lg:col-span-1 flex flex-col gap-4">
+
+          {/* Friend Info Card */}
+          <div className="bg-white rounded-2xl border border-base-300 p-6 flex flex-col items-center text-center gap-3">
             <img
               src={friend.picture}
               alt={friend.name}
-              className="w-28 h-28 rounded-full bg-base-200 object-cover"
+              className="w-20 h-20 rounded-full object-cover"
             />
             <div>
-              <h1 className="font-display text-2xl font-bold text-base-content">
-                {friend.name}
-              </h1>
-              <span className={`text-xs font-semibold px-3 py-1 rounded-full mt-2 inline-block ${status.className}`}>
+              <h1 className="font-semibold text-lg text-base-content">{friend.name}</h1>
+              <span className={`text-xs font-semibold px-3 py-1 rounded-full mt-1 inline-block ${status.className}`}>
                 {status.label}
               </span>
             </div>
 
-            <div className="flex flex-wrap gap-2 justify-center">
+            {/* Tags */}
+            <div className="flex flex-wrap gap-1.5 justify-center">
               {friend.tags.map((tag) => (
-                <span key={tag} className={`text-xs font-medium px-3 py-1 rounded-full ${getTagStyle(tag)}`}>
+                <span key={tag} className={`text-xs font-medium px-2.5 py-0.5 rounded-full ${getTagStyle(tag)}`}>
                   {tag}
                 </span>
               ))}
             </div>
 
-            <p className="text-sm text-gray-500 leading-relaxed">{friend.bio}</p>
+            {/* Bio */}
+            <p className="text-xs text-gray-400 leading-relaxed italic">
+              "{friend.bio}"
+            </p>
 
-            <a href={`mailto:${friend.email}`} className="text-sm text-primary underline">
-              {friend.email}
-            </a>
+            {/* Email */}
+            <p className="text-xs text-gray-400">{friend.email}</p>
+          </div>
 
-            <div className="w-full flex flex-col gap-2 mt-2">
-              <button className="btn btn-outline btn-sm gap-2 w-full">
-                <Bell size={14} /> Snooze 2 Weeks
-              </button>
-              <button className="btn btn-outline btn-sm gap-2 w-full">
-                <Archive size={14} /> Archive
-              </button>
-              <button className="btn btn-outline btn-error btn-sm gap-2 w-full">
-                <Trash2 size={14} /> Delete
-              </button>
-            </div>
+          {/* Action Buttons */}
+          <div className="bg-white rounded-2xl border border-base-300 p-4 flex flex-col gap-2">
+            <button className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-base-200 rounded-lg transition w-full">
+              <Bell size={15} /> Snooze 2 Weeks
+            </button>
+            <button className="flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:bg-base-200 rounded-lg transition w-full">
+              <Archive size={15} /> Archive
+            </button>
+            <button className="flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition w-full">
+              <Trash2 size={15} /> Delete
+            </button>
           </div>
         </div>
 
         {/* RIGHT COLUMN */}
-        <div className="lg:col-span-2 flex flex-col gap-6">
+        <div className="lg:col-span-2 flex flex-col gap-4">
+
+          {/* 3 Stat Cards */}
           <div className="grid grid-cols-3 gap-4">
             {[
-              { label: "Days Since Contact", value: friend.days_since_contact, icon: Clock, color: "text-error" },
-              { label: "Goal (days)", value: friend.goal, icon: Target, color: "text-primary" },
-              { label: "Next Due Date", value: friend.next_due_date, icon: Calendar, color: "text-warning" },
-            ].map((stat) => {
-              const Icon = stat.icon;
-              return (
-                <div key={stat.label} className="bg-white rounded-2xl border border-base-300 p-4 text-center">
-                  <Icon size={20} className={`${stat.color} mx-auto mb-2`} />
-                  <div className={`font-display text-xl font-bold ${stat.color}`}>
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-gray-400 mt-1">{stat.label}</div>
+              { label: "Days Since Contact", value: friend.days_since_contact },
+              { label: "Goal (Days)", value: friend.goal },
+              { label: "Next Due", value: friend.next_due_date },
+            ].map((stat) => (
+              <div key={stat.label} className="bg-white rounded-2xl border border-base-300 p-4 text-center">
+                <div className="font-display text-2xl font-bold text-base-content">
+                  {stat.value}
                 </div>
-              );
-            })}
+                <div className="text-xs text-gray-400 mt-1">{stat.label}</div>
+              </div>
+            ))}
           </div>
 
+          {/* Relationship Goal */}
           <div className="bg-white rounded-2xl border border-base-300 p-5">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="font-semibold text-base-content">Relationship Goal</h2>
-              <button className="btn btn-outline btn-xs gap-1">
-                <Edit2 size={12} /> Edit
-              </button>
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="font-semibold text-sm text-base-content">Relationship Goal</h2>
+              <button className="text-xs text-gray-400 hover:text-primary transition">Edit</button>
             </div>
             <p className="text-sm text-gray-500">
-              You aim to connect with <strong>{friend.name}</strong> at least every{" "}
-              <strong>{friend.goal} days</strong>.
+              Connect every <strong>{friend.goal} days</strong>
             </p>
-            <div className="mt-3 w-full bg-base-200 rounded-full h-2">
-              <div
-                className={`h-2 rounded-full ${
-                  friend.status === "overdue" ? "bg-error"
-                  : friend.status === "almost due" ? "bg-warning"
-                  : "bg-success"
-                }`}
-                style={{ width: `${Math.min((friend.days_since_contact / friend.goal) * 100, 100)}%` }}
-              />
-            </div>
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
-              <span>0 days</span>
-              <span>{friend.goal} days goal</span>
-            </div>
           </div>
 
+          {/* Quick Check-In */}
           <div className="bg-white rounded-2xl border border-base-300 p-5">
-            <h2 className="font-semibold text-base-content mb-4">Quick Check-In</h2>
+            <h2 className="font-semibold text-sm text-base-content mb-4">Quick Check-In</h2>
             <div className="grid grid-cols-3 gap-3">
-              {checkinButtons.map(({ type, icon: Icon, label }) => (
+              {[
+                { type: "Call",  icon: Phone,          label: "Call" },
+                { type: "Text",  icon: MessageSquare,  label: "Text" },
+                { type: "Video", icon: Video,          label: "Video" },
+              ].map(({ type, icon: Icon, label }) => (
                 <button
                   key={type}
                   onClick={() => handleCheckin(type)}
-                  className="btn btn-primary gap-2 text-white"
+                  className="flex flex-col items-center gap-2 py-4 rounded-xl border border-base-300 hover:bg-base-200 transition text-gray-600"
                 >
-                  <Icon size={16} />
-                  {label}
+                  <Icon size={22} />
+                  <span className="text-xs font-medium">{label}</span>
                 </button>
               ))}
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
     </div>
   );
