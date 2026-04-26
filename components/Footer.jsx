@@ -1,20 +1,20 @@
 export default function Footer() {
   return (
     <footer className="bg-neutral text-neutral-content mt-16">
-      <div className="max-w-4xl mx-auto px-4 py-12 flex flex-col items-center text-center gap-4">
+      <div className="max-w-6xl mx-auto px-4 py-12 flex flex-col items-center text-center gap-4">
         {/* Logo + Name */}
-        <span className="font-display text-3xl font-bold text-white tracking-wide">
+        <span className="font-display text-4xl font-black  text-white tracking-wide">
           <span className="text-white">Keen</span>
-          <span className="text-secondary">Keeper</span>
+          <span className="text-white">Keeper</span>
         </span>
 
         {/* Tagline */}
-        <p className="text-sm text-neutral-content/60 max-w-sm">
+        <p className="text-sm text-white max-w-sm">
           Your personal shelf of meaningful connections. Browse, tend, and nurture the relationships that matter most.
         </p>
 
         {/* Social Links label */}
-        <p className="text-xs text-neutral-content/40 uppercase tracking-widest mt-2">Social Links</p>
+        <p className="text-xs text-white uppercase tracking-widest mt-2">Social Links</p>
 
         {/* Social Icons */}
         <div className="flex gap-3">
@@ -39,7 +39,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 w-full mt-4 pt-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-neutral-content/40">
+        <div className="border-t border-white/10 w-full mt-4 pt-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white">
           <span>© 2025 KeenKeeper. All rights reserved.</span>
           <div className="flex gap-4">
             <span className="cursor-pointer hover:text-white transition">Privacy Policy</span>
