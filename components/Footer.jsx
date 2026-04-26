@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="bg-neutral text-neutral-content mt-16">
-      <div className="max-w-6xl mx-auto px-4 py-12 flex flex-col items-center text-center gap-4">
+      <div className="max-w-6xl mx-auto px-5 py-12 flex flex-col items-center text-center gap-4">
         {/* Logo + Name */}
         <span className="font-display text-4xl font-black  text-white tracking-wide">
           <span className="text-white">Keen</span>
@@ -39,9 +39,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-white/10 w-full mt-4 pt-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white">
+        <div className="border-t border-white/10 w-full mt-5 pt-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white">
           <span>© 2025 KeenKeeper. All rights reserved.</span>
-          <div className="flex gap-4">
+          <div className="flex gap-5">
             <span className="cursor-pointer hover:text-white transition">Privacy Policy</span>
             <span className="cursor-pointer hover:text-white transition">Terms of Service</span>
             <span className="cursor-pointer hover:text-white transition">Cookies</span>
